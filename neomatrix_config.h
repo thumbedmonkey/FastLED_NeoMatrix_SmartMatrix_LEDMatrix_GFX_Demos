@@ -1769,7 +1769,8 @@ void matrix_setup(bool initserial=true, int reservemem = 40000) {
 	    // or 520Hz with lsb_ns at 50 not 100
 	    // but things are 1/3rd as bright so
 	    // we go back to 0 for 333Hz with 50ns
-            defaults.pwm_dither_bits = 1;
+            // 1 is faster, but seem too dim, let's do 0
+            defaults.pwm_dither_bits = 0;
             //defaults.led_rgb_sequence = "RBG";
             defaults.pixel_mapper_config = "V-mapper";
         #elif GFXDISPLAY_M128BY192_4_3
