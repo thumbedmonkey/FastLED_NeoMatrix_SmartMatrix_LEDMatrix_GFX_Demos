@@ -297,6 +297,18 @@ uint32_t tft_spi_speed;
        #pragma message "M128BY192ABC read from /root/NM/gfxdisplay"
        const uint16_t MATRIX_TILE_WIDTH = 128;
        const uint16_t MATRIX_TILE_HEIGHT= 192;
+   #elif GFXDISPLAY_M128BY192ABCPWM
+       #pragma message "M128BY192ABCPWM read from /root/NM/gfxdisplay"
+       const uint16_t MATRIX_TILE_WIDTH = 128;
+       const uint16_t MATRIX_TILE_HEIGHT= 192;
+   #elif GFXDISPLAY_M288BY192_9_3_Zmap_Rot
+       #pragma message "M288BY192_9_3_Zmap_Rot read from /root/NM/gfxdisplay"
+       const uint16_t MATRIX_TILE_WIDTH = 288;
+       const uint16_t MATRIX_TILE_HEIGHT= 192;
+   #elif GFXDISPLAY_M288BY192_9_3_Zmap
+       #pragma message "M288BY192_9_3_Zmap read from /root/NM/gfxdisplay"
+       const uint16_t MATRIX_TILE_WIDTH = 192;
+       const uint16_t MATRIX_TILE_HEIGHT= 288;
    #elif GFXDISPLAY_M128BY192_4_3_Zmap
        #pragma message "M128BY192_4_3_Zmap read from /root/NM/gfxdisplay"
        const uint16_t MATRIX_TILE_WIDTH = 128;
@@ -1703,6 +1715,13 @@ void matrix_setup(bool initserial=true, int reservemem = 40000) {
             defaults.led_rgb_sequence = "RGB";
             defaults.panel_type = "FM6126A";
 	    defaults.row_address_type = 5;
+        #elif GFXDISPLAY_M128BY192ABCPWM
+            defaults.rows = 64;
+            defaults.cols = 128;
+            defaults.chain_length = 1;
+            defaults.parallel = 3;
+	    defaults.spwm_row_address_type = 1;
+            defaults.panel_type = "sm16380sh";
         #elif GFXDISPLAY_M128BY192_4_3_Zmap
             defaults.rows = 32;
             defaults.cols = 64;
@@ -1828,30 +1847,32 @@ void matrix_setup(bool initserial=true, int reservemem = 40000) {
         rgb_matrix::RuntimeOptions ropt;
 	// Patterns full of white can cause screen wide flashes
 	// with slowdown 5 due to clock/data de-sync
-	#if GFXDISPLAY_M128BY208_13_2_Vmap
-	    ropt.gpio_slowdown = 6;
-	#elif GFXDISPLAY_M208BY128_13_2_Vmap_Rot
-	    // not used, just here for demo
-	    ropt.gpio_slowdown = 8;
-	#elif GFXDISPLAY_M192BY256_8_3_Zmap
-	    // cube works at 2, but real code needs 3
-	    ropt.gpio_slowdown = 3;
-	#elif GFXDISPLAY_M128BY128ABC
-	    ropt.gpio_slowdown = 4;
-	#elif GFXDISPLAY_M192BY128_4_3_Umap_Rot 
-	    ropt.gpio_slowdown = 2;
-	#elif GFXDISPLAY_M128BY192ABC
-	    ropt.gpio_slowdown = 2;
-	    #if RPI02W
-		ropt.gpio_slowdown = 3;
-	    #endif
-	#elif RPI4
-	    ropt.gpio_slowdown = 4;
-	#elif RPI02W
-	    ropt.gpio_slowdown = 2;
-	#else
-	    ropt.gpio_slowdown = 1;
-	#endif
+        #if GFXDISPLAY_M128BY208_13_2_Vmap
+            ropt.gpio_slowdown = 6;
+        #elif GFXDISPLAY_M208BY128_13_2_Vmap_Rot
+            // not used, just here for demo
+            ropt.gpio_slowdown = 8;
+        #elif GFXDISPLAY_M192BY256_8_3_Zmap
+            // cube works at 2, but real code needs 3
+            ropt.gpio_slowdown = 3;
+        #elif GFXDISPLAY_M128BY128ABC
+            ropt.gpio_slowdown = 4;
+        #elif GFXDISPLAY_M128BY192ABCPWM
+	    ropt.gpio_slowdown = 5;
+        #elif GFXDISPLAY_M192BY128_4_3_Umap_Rot 
+            ropt.gpio_slowdown = 2;
+        #elif GFXDISPLAY_M128BY192ABC
+            ropt.gpio_slowdown = 2;
+            #if RPI02W
+                ropt.gpio_slowdown = 3;
+            #endif
+        #elif RPI4
+            ropt.gpio_slowdown = 4;
+        #elif RPI02W
+            ropt.gpio_slowdown = 2;
+        #else
+            ropt.gpio_slowdown = 1;
+        #endif
 	// stay root (useful for accessing /dev/ttyUSB0 and others)
 	ropt.drop_privileges = -1;
 
