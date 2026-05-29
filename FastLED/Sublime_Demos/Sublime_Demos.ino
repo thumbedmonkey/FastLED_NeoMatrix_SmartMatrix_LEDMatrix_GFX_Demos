@@ -198,7 +198,7 @@ void rain(byte backgroundDepth, byte maxBrightness, byte spawnFreq, byte tailLen
 
 
 			if (random16() < 72) {		// Odds of a lightning bolt
-				lightning[scale8(random8(), MATRIX_WIDTH-1) + (MATRIX_HEIGHT-1) * MATRIX_WIDTH] = 255;	// Random starting location
+				lightning[scale8(random8(), min(255,MATRIX_WIDTH-1)) + (MATRIX_HEIGHT-1) * MATRIX_WIDTH] = 255;	// Random starting location
 				for(int ly = MATRIX_HEIGHT-1; ly > 1; ly--) {
 					for (int lx = 1; lx < MATRIX_WIDTH-1; lx++) {
 						if (lightning[lx + ly * MATRIX_WIDTH] == 255) {

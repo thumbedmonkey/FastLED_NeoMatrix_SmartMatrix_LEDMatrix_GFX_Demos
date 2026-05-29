@@ -341,6 +341,10 @@ uint32_t tft_spi_speed;
        #pragma message "M288BY192_9_3_Zmap read from /root/NM/gfxdisplay"
        const uint16_t MATRIX_TILE_WIDTH = 192;
        const uint16_t MATRIX_TILE_HEIGHT= 288;
+   #elif GFXDISPLAY_M350BY12
+       #pragma message "M350BY12 read from /root/NM/gfxdisplay"
+       const uint16_t MATRIX_TILE_WIDTH = 350;
+       const uint16_t MATRIX_TILE_HEIGHT= 12;
    #else
        #pragma message "Please write M384BY256 or equivalent to /root/NM/gfxdisplay (see ../../makeNativeArduino.mk)"
        const uint16_t MATRIX_TILE_WIDTH = 320;
