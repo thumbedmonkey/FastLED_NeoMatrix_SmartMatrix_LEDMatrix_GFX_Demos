@@ -1862,7 +1862,7 @@ void matrix_setup(bool initserial=true, int reservemem = 40000) {
         #elif GFXDISPLAY_M128BY128ABC
             ropt.gpio_slowdown = 4;
         #elif GFXDISPLAY_M128BY192ABCPWM
-	    ropt.gpio_slowdown = 5;
+	    ropt.gpio_slowdown = 3;
         #elif GFXDISPLAY_M192BY128_4_3_Umap_Rot 
             ropt.gpio_slowdown = 2;
         #elif GFXDISPLAY_M128BY192ABC
