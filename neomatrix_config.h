@@ -1725,6 +1725,7 @@ void matrix_setup(bool initserial=true, int reservemem = 40000) {
             defaults.chain_length = 1;
             defaults.parallel = 3;
 	    defaults.spwm_row_address_type = 1;
+	    defaults.spwm_register_config=18; // or 10
             defaults.panel_type = "sm16380sh";
         #elif GFXDISPLAY_M128BY192_4_3_Zmap
             defaults.rows = 32;
